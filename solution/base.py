@@ -5,14 +5,13 @@ class Base(ABC):
     start = time.time()
     input = {}
 
-    def __init__(self):
-        with open(f'input/{self.year}/{self.day}.txt', 'r') as f:
-            self.realinput = f.read()
-        try:
-            with open(f'input/{self.year}/{self.day}_example.txt', 'r') as f:
-                self.testinput = f.read()
-        except FileNotFoundError:
-            self.testinput = ""
+    def __init__(self, input_suffix):
+        if input_suffix:
+            file = f'input/{self.year}/{self.day}_{input_suffix}.txt'
+        else:
+            file = f'input/{self.year}/{self.day}.txt'
+        with open(file, 'r') as f:
+            self.input = f.read()
 
     def timing(self):
         end = time.time()
@@ -20,15 +19,9 @@ class Base(ABC):
         self.start = end
 
     def run(self):
+        self.input = self.parse_input(self.input)
         self.timing()
-        if self.testinput:
-            self.input = self.parse_input(self.testinput)
-            print("Part 1 (test):", self.part1())
-            self.timing()
-            print("Part 2 (test):", self.part2())
-            self.timing()
 
-        self.input = self.parse_input(self.realinput)
         print("Part 1:", self.part1())
         self.timing()
 

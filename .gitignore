@@ -2,3 +2,4 @@ input
 .env
 __pycache__
 env
+*.egg-info
