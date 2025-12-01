@@ -20,7 +20,7 @@ def init(year, day):
 @click.argument('day')
 @click.argument('input_suffix', required=False, default=None)
 def run(year, day, input_suffix):
-    module = importlib.import_module(f'solution.{year}.{day}')
+    module = importlib.import_module(f'solution.{year}.{day:0>2}')
 
     solution = module.Solution(input_suffix)
     solution.run()
