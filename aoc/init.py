@@ -16,11 +16,14 @@ class Init:
         self.fetch_input()
 
     def create_solution(self):
-        template = f'''from days.base import Base
+        template = f'''from solution.base import Base
 
 class Solution(Base):
     year = {self.year}
     day = "{self.day:02}"
+
+    def parse_input(self, data):
+        return data.splitlines()
 
     def part1(self):
         return
@@ -38,6 +41,6 @@ class Solution(Base):
 
         r = requests.get(url, cookies=cookies)
         r.raise_for_status()
-        
+
         with open(f"input/{self.year}/{self.day:02}.txt", "w") as f:
             f.write(r.text)
