@@ -4,13 +4,13 @@ class Solution(Base):
     year = 2025
     day = "05"
 
-    fresh = []
     ranges = {}
     items = []
 
     def _parse_input(self, data):
         lines = data.splitlines()
         using_fresh = False
+        ranges = {}
         for line in lines:
             if using_fresh:
                 self.items.append(int(line))
@@ -19,10 +19,23 @@ class Solution(Base):
                     using_fresh = True
                 else:
                     (start, end) = line.split('-')
-                    if int(start) in self.ranges:
-                        self.ranges[int(start)] = max(self.ranges[int(start)], int(end))
+                    if int(start) in ranges:
+                        ranges[int(start)] = max(ranges[int(start)], int(end))
                     else:
-                        self.ranges[int(start)] = int(end)
+                        ranges[int(start)] = int(end)
+        keys = sorted(ranges)
+        curend = 0
+        start = 0
+        curstart = 0
+        for key in keys:
+            end = ranges[key]
+            if key <= curend:
+                self.ranges[curstart] = max(self.ranges[curstart], end)
+                end = max(curend, end)
+            else:
+                self.ranges[key] = end
+                curend = end
+                curstart = key
 
     def _isfresh(self, item):
         for start, end in self.ranges.items():
@@ -38,13 +51,7 @@ class Solution(Base):
         return output
 
     def _part2(self):
-        keys = sorted(self.ranges)
         output = 0
-        cur = 0
-        for key in keys:
-            start = max(key, cur)
-            end = self.ranges[key]
-            if start <= end:
-                output += end - start + 1
-                cur = end + 1
+        for start, end in self.ranges.items():
+            output += end - start + 1
         return output
