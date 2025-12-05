@@ -5,13 +5,13 @@ class Solution(Base):
     day = "04"
     grid = {}
 
-    def parse_input(self, data):
-        l = 0
+    def _parse_input(self, data):
+        line_id = 0
         for line in data.splitlines():
-            self.grid[l] = {i: v for i, v in enumerate(list(line))}
-            l += 1
+            self.grid[line_id] = dict(enumerate(list(line)))
+            line_id += 1
 
-    def part1(self):
+    def _part1(self):
         output = 0
         for line, columns in self.grid.items():
             for column, state in columns.items():
@@ -20,7 +20,7 @@ class Solution(Base):
                         output += 1
         return output
 
-    def part2(self):
+    def _part2(self):
         output = 0
         n = 1
         while n > 0:

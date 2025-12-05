@@ -22,13 +22,13 @@ class Solution(Base):
     year = {self.year}
     day = "{self.day:02}"
 
-    def parse_input(self, data):
+    def _parse_input(self, data):
         return data.splitlines()
 
-    def part1(self):
+    def _part1(self):
         return
 
-    def part2(self):
+    def _part2(self):
         return
 '''
 

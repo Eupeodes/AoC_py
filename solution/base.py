@@ -11,31 +11,31 @@ class Base(ABC):
         else:
             file = f'input/{self.year}/{self.day}.txt'
         with open(file, 'r') as f:
-            self.input = f.read()
+            self.input = self._parse_input(f.read())
 
-    def timing(self):
+    def _timing(self):
         end = time.time()
         print(f"Execution Time: {end - self.start} seconds")
         self.start = end
 
     def run(self):
-        self.input = self.parse_input(self.input)
-        self.timing()
+        '''The main function'''
+        self._timing()
 
-        print("Part 1:", self.part1())
-        self.timing()
+        print("Part 1:", self._part1())
+        self._timing()
 
-        print("Part 2:", self.part2())
-        self.timing()
+        print("Part 2:", self._part2())
+        self._timing()
 
     @abstractmethod
-    def parse_input(self, data):
+    def _parse_input(self, data):
         return data
-    
+
     @abstractmethod
-    def part1():
+    def _part1(self):
         pass
 
-    
-    def part2():
+    @abstractmethod
+    def _part2(self):
         pass

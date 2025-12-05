@@ -5,14 +5,14 @@ class Solution(Base):
     year = 2025
     day = "02"
 
-    def parse_input(self, data):
+    def _parse_input(self, data):
         ranges = (x.split('-') for x in data.split(','))
         input = []
         for x in ranges:
             input.append((int(x[0]), int(x[1])+1))
         return input
 
-    def part1(self):
+    def _part1(self):
         re_two = re.compile(r'^(.+)\1$')
         ret = 0
         for x in self.input:
@@ -21,7 +21,7 @@ class Solution(Base):
                     ret += i
         return ret
 
-    def part2(self):
+    def _part2(self):
         re_multiple = re.compile(r'^(.+)(\1){1,}$')
         ret = 0
         for x in self.input:

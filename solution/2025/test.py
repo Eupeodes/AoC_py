@@ -6,13 +6,13 @@ class Solution(Base):
     year = 2025
     day = 'test'
 
-    def parse_input(self, data):
+    def _parse_input(self, data):
         return data.split(' ')
 
-    def part1(self):
+    def _part1(self):
         return self.run_script()
 
-    def part2(self):
+    def _part2(self):
         return self.run_script(2025)
 
     def run_script(self, multiplier=1):

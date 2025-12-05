@@ -8,15 +8,15 @@ class Solution(Base):
     at_zero = 0
     all_zeros = 0
 
-    def parse_input(self, data):
+    def _parse_input(self, data):
         return data.splitlines()
 
-    def part1(self):
+    def _part1(self):
         for line in self.input:
             self.dial(line)
         return self.at_zero
 
-    def part2(self):
+    def _part2(self):
         return self.all_zeros
 
     def dial(self, action):

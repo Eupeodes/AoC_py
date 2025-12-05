@@ -8,7 +8,7 @@ class Solution(Base):
     ranges = {}
     items = []
 
-    def parse_input(self, data):
+    def _parse_input(self, data):
         lines = data.splitlines()
         using_fresh = False
         for line in lines:
@@ -30,14 +30,14 @@ class Solution(Base):
                 return True
         return False
 
-    def part1(self):
+    def _part1(self):
         output = 0
         for item in self.items:
             if self._isfresh(item):
                 output += 1
         return output
 
-    def part2(self):
+    def _part2(self):
         keys = sorted(self.ranges)
         output = 0
         cur = 0

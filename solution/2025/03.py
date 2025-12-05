@@ -4,16 +4,16 @@ class Solution(Base):
     year = 2025
     day = "03"
 
-    def parse_input(self, data):
+    def _parse_input(self, data):
         return data.splitlines()
 
-    def part1(self):
+    def _part1(self):
         ret = 0
         for bank in self.input:
             ret += _get_yoltage(bank, 2)
         return ret
 
-    def part2(self):
+    def _part2(self):
         ret = 0
         for bank in self.input:
             ret += _get_yoltage(bank, 12)
