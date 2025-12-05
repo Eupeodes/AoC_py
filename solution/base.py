@@ -1,16 +1,20 @@
 from abc import ABC, abstractmethod
 import time
 
-class Base(ABC):
+
+class Base(ABC):  # pylint: disable=R0903
+    '''Base class for AoC solution'''
     start = time.time()
     input = {}
+    year = ''
+    day = ''
 
     def __init__(self, input_suffix):
         if input_suffix:
             file = f'input/{self.year}/{self.day}_{input_suffix}.txt'
         else:
             file = f'input/{self.year}/{self.day}.txt'
-        with open(file, 'r') as f:
+        with open(file, 'r', encoding="utf-8") as f:
             self.input = self._parse_input(f.read())
 
     def _timing(self):

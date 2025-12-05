@@ -4,7 +4,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 class Init:
+    '''Class to initialize a AoC day'''
     def __init__(self, year: int, day: int):
         self.session = os.getenv("AOC_SESSION")
         if self.session is None:
@@ -12,10 +14,10 @@ class Init:
         self.year = year
         self.day = day
 
-        self.create_solution()
-        self.fetch_input()
+        self._create_solution()
+        self._fetch_input()
 
-    def create_solution(self):
+    def _create_solution(self):
         template = f'''from solution.base import Base
 
 class Solution(Base):
@@ -32,15 +34,15 @@ class Solution(Base):
         return
 '''
 
-        with open(f'solution/{self.year}/{self.day:02}.py', 'w') as f:
+        with open(f'solution/{self.year}/{self.day:02}.py', 'w', encoding="utf-8") as f:
             f.write(template)
 
-    def fetch_input(self):
+    def _fetch_input(self):
         url = f"https://adventofcode.com/{self.year}/day/{self.day}/input"
         cookies = {"session": self.session}
 
-        r = requests.get(url, cookies=cookies)
+        r = requests.get(url, cookies=cookies, timeout=30)
         r.raise_for_status()
 
-        with open(f"input/{self.year}/{self.day:02}.txt", "w") as f:
+        with open(f"input/{self.year}/{self.day:02}.txt", "w", encoding="utf-8") as f:
             f.write(r.text)
