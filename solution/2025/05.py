@@ -39,7 +39,9 @@ class Solution(Base):
 
     def _isfresh(self, item):
         for start, end in self.ranges.items():
-            if start <= item <= end:
+            if start > item:
+                return False
+            if end >= item:
                 return True
         return False
 
